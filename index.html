@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>岩速鉴 RockID · 野外岩石快速鉴定</title>
+<meta name="description" content="离线可用的岩石快速鉴定工具：按特征定名、按名称查特征、矿物速查、岩石对比">
+<meta name="theme-color" content="#1a1815">
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+<header class="app-header">
+  <div class="brand">
+    <span class="brand-mark">岩速鉴</span>
+    <span class="brand-sub">RockID · 收录 <span id="rockCount">0</span> 种岩石</span>
+  </div>
+  <div class="header-actions">
+    <button class="icon-btn" id="themeToggle" title="切换主题">☾</button>
+  </div>
+</header>
+
+<nav class="tab-bar">
+  <button class="tab-btn active" data-target="tab-identify"><span class="ic">◎</span>快速定名</button>
+  <button class="tab-btn" data-target="tab-dict"><span class="ic">▤</span>岩石百科</button>
+  <button class="tab-btn" data-target="tab-compare"><span class="ic">⇄</span>对比</button>
+  <button class="tab-btn" data-target="tab-minerals"><span class="ic">◆</span>矿物速查</button>
+  <button class="tab-btn" data-target="tab-favs"><span class="ic">★</span>收藏夹</button>
+</nav>
+
+<main>
+
+  <!-- Tab 1: 快速定名 -->
+  <section class="panel active" id="tab-identify">
+    <div class="panel-intro">
+      <h1>按特征快速定名</h1>
+      <p>勾选野外观察到的颜色、结构、构造、矿物及特殊鉴定特征，系统会按符合度实时排序推荐岩石名称。</p>
+    </div>
+    <div id="filterGroups"></div>
+    <div class="filter-toolbar">
+      <span class="count">已选择 <b id="selectedCount">0</b> 项特征</span>
+      <button class="text-btn" id="clearFiltersBtn">清空重选</button>
+    </div>
+    <div id="identifyResults"></div>
+  </section>
+
+  <!-- Tab 2: 岩石百科 -->
+  <section class="panel" id="tab-dict">
+    <div class="panel-intro">
+      <h1>岩石百科</h1>
+      <p>按名称搜索，或按大类浏览，查看每种岩石的颜色、矿物成分、结构构造及地质意义。</p>
+    </div>
+    <div class="search-row">
+      <input type="text" id="dictSearch" placeholder="输入岩石中英文名称，如「花岗岩」或 Basalt">
+    </div>
+    <div class="cat-filters">
+      <button class="cat-filter-btn active" data-cat="全部">全部</button>
+      <button class="cat-filter-btn" data-cat="岩浆岩">▲ 岩浆岩</button>
+      <button class="cat-filter-btn" data-cat="沉积岩">▤ 沉积岩</button>
+      <button class="cat-filter-btn" data-cat="变质岩">◈ 变质岩</button>
+    </div>
+    <div id="dictList"></div>
+  </section>
+
+  <!-- Tab 3: 对比工具 -->
+  <section class="panel" id="tab-compare">
+    <div class="panel-intro">
+      <h1>岩石对比</h1>
+      <p>选择两种容易混淆的岩石，逐项对比颜色、矿物、结构、构造及地质意义。</p>
+    </div>
+    <div class="compare-selects">
+      <select id="compareA"></select>
+      <select id="compareB"></select>
+    </div>
+    <div id="compareResult"></div>
+  </section>
+
+  <!-- Tab 4: 矿物速查 -->
+  <section class="panel" id="tab-minerals">
+    <div class="panel-intro">
+      <h1>常见造岩矿物速查</h1>
+      <p>颜色、光泽、硬度、解理与关键鉴定特征，辅助手标本矿物鉴定。</p>
+    </div>
+    <div class="search-row">
+      <input type="text" id="mineralSearch" placeholder="搜索矿物名称，如「石英」或 Feldspar">
+    </div>
+    <div id="mineralList"></div>
+  </section>
+
+  <!-- Tab 5: 收藏夹 -->
+  <section class="panel" id="tab-favs">
+    <div class="panel-intro">
+      <h1>我的收藏</h1>
+      <p>收藏常用或易混淆的岩石，方便野外快速复查。</p>
+    </div>
+    <div id="favList"></div>
+  </section>
+
+</main>
+
+<div class="overlay" id="detailOverlay">
+  <div id="detailModal" style="width:100%; max-width:640px; position:relative;">
+    <button class="close-btn" id="detailClose">×</button>
+  </div>
+</div>
+
+<script src="./data.js"></script>
+<script src="./minerals.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
